@@ -1,0 +1,21 @@
+version: "3.0"
+
+services:
+  website_stable:
+    image: docker.pkg.github.com/svindicium/indicium-website/website:stable
+    restart: always
+    networks:
+      - web
+    expose:
+      - "3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.website_stable.entrypoints=websecure"
+      - "traefik.http.routers.website_stable.rule=Host(`indicium.hu`, `www.indicium.hu`)"
+      - "traefik.http.routers.website_stable.tls=true"
+      - "traefik.http.routers.website_stable.tls.certresolver=le"
+
+networks:
+  web:
+    external: true
+

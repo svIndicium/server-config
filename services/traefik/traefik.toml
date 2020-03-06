@@ -1,0 +1,24 @@
+debug = true
+
+logLevel = "ERROR"
+defaultEntryPoints = ["websecure","web"]
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+  [entryPoints.websecure]
+    address = ":443"
+
+[certificatesResolvers.le.acme]
+  email = "ferrantufan@indicium.hu"
+  storage = "acme.json"
+  [certificatesResolvers.le.acme.httpChallenge]
+    entryPoint = "web"
+
+[providers]
+  [providers.file]
+    watch = true
+    filename = "/etc/traefik/traefik-dynamic.toml"
+
+  [providers.docker]
+    network = "web"

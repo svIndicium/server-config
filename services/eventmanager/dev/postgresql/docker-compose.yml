@@ -1,0 +1,19 @@
+version: "3.0"
+
+services:
+  postgres_dev:
+    image: "postgres:11.1"
+    volumes:
+      - /srv/persistent-storage/eventmanager/dev/postgresql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: drjW0qx6qEbF5g2Yn8whymEhJaiXun4c
+      POSTGRES_USER: eventmanager
+      POSTGRES_DB: eventmanager
+    ports:
+      - "5432:5432"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
